@@ -49,6 +49,9 @@ int utest::main()
 			this_test_failed = true;
 		}
 
+		if (test.test_name().find("#fails") != std::string::npos)
+			this_test_failed = !this_test_failed;
+
 		if (this_test_failed)
 			failed = true;
 	}

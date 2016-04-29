@@ -1,6 +1,6 @@
 #include <test.h>
 
-UTEST_TEST("Hello world")
+TEST("Hello world")
 {
 	// This test is a part of a suite `Suite` and is named `HelloWorld`.
 	// Case matters. The test will be referred to by the framework
@@ -8,9 +8,14 @@ UTEST_TEST("Hello world")
 	// to run this test only.
 }
 
-UTEST_TEST("it shall support simple comparisons")
+TEST("it shall support simple comparisons")
 {
 	chk 1 == 1;
+}
+
+TEST("it shall support failing tests #fails")
+{
+	chk 1 == 2;
 }
 
 int main()
