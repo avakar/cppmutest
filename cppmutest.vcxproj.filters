@@ -1,0 +1,21 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <ClCompile Include="global_registry.cpp" />
+    <ClCompile Include="utest_main.cpp" />
+    <ClCompile Include="event_sink.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="test.h" />
+    <ClInclude Include="utest.h" />
+    <ClInclude Include="detail\check.h">
+      <Filter>detail</Filter>
+    </ClInclude>
+    <ClInclude Include="event_sink.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <Filter Include="detail">
+      <UniqueIdentifier>{64003161-e751-49e3-912a-6d78774baed5}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+</Project>

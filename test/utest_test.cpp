@@ -1,4 +1,4 @@
-#include <utest.h>
+#include <test.h>
 
 UTEST_TEST("Hello world")
 {
@@ -10,7 +10,7 @@ UTEST_TEST("Hello world")
 
 UTEST_TEST("it shall support simple comparisons")
 {
-	UTEST_ASSERT_EQ(1, 1);
+	chk 1 == 1;
 }
 
 int main()
