@@ -1,5 +1,6 @@
 **.sdf
 **.opensdf
+**.vcxproj.user
 Debug/
 Release/
 .vs/
