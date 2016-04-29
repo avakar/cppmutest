@@ -1,10 +1,12 @@
 #ifndef CPPUTEST_UTEST_H
 #define CPPUTEST_UTEST_H
 
-#define UTEST_TEST(suite_name, test_name, ...) \
-	void suite_name ## _ ## test_name ## _utest(); \
-	static ::utest::global_registrar _utest_global_registrar_ ## suite_name ## test_name(#suite_name, #test_name, ::utest::parse_tags(__VA_ARGS__), suite_name ## _ ## test_name ## _utest); \
-	void suite_name ## _ ## test_name ## _utest()
+#define UTEST_TEST(test_name) UTEST_TEST_IMPL(test_name, __COUNTER__)
+#define UTEST_TEST_IMPL(test_name, counter) UTEST_TEST_IMPL2(test_name, counter)
+#define UTEST_TEST_IMPL2(test_name, counter) \
+	static void _utest_test_ ## counter(); \
+	static ::utest::global_registrar _utest_global_registrar_ ## counter(test_name, &_utest_test_ ## counter); \
+	static void _utest_test_ ## counter()
 
 #define UTEST_ASSERT_EQ(lhs, rhs) \
 	if ((rhs) != (lhs)) throw ::utest::assertion_failed_error();
@@ -34,20 +36,16 @@ typedef void (*test_fn)();
 class test
 {
 public:
-	test(char const * suite_name, char const * case_name, std::vector<std::string> && tags, test_fn fn)
-		: m_suite_name(suite_name), m_case_name(case_name), m_tags(std::move(tags)), m_fn(fn)
+	test(char const * test_name, test_fn fn)
+		: m_test_name(test_name), m_fn(fn)
 	{
 	}
 
-	std::string suite_name() const;
-	std::string case_name() const;
-	std::vector<std::string> const & tags() const { return m_tags; }
+	std::string test_name() const;
 	test_fn fn() const { return m_fn; }
 
 private:
-	std::string m_suite_name;
-	std::string m_case_name;
-	std::vector<std::string> m_tags;
+	std::string m_test_name;
 	test_fn m_fn;
 };
 
@@ -71,7 +69,7 @@ private:
 class global_registrar
 {
 public:
-	global_registrar(char const * suite_name, char const * case_name, std::vector<std::string> && tags, test_fn fn);
+	global_registrar(char const * test_name, test_fn fn);
 	global_registrar * next() const;
 	test get_test() const;
 
@@ -80,9 +78,7 @@ public:
 
 private:
 	global_registrar * m_next;
-	char const * m_suite_name;
-	char const * m_case_name;
-	std::vector<std::string> m_tags;
+	char const * m_test_name;
 	test_fn m_fn;
 };
 
