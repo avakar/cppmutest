@@ -15,7 +15,7 @@
 
 namespace utest {
 
-int main();
+int master_main(int argc, char const * const argv[]);
 
 typedef void (*test_fn)();
 

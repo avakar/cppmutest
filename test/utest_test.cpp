@@ -17,8 +17,3 @@ TEST("it shall support failing tests #fails")
 {
 	chk 1 == 2;
 }
-
-int main()
-{
-	return utest::main();
-}
