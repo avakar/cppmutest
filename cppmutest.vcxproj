@@ -11,7 +11,6 @@
     </ProjectConfiguration>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="mutest\check.h" />
     <ClInclude Include="mutest\detail\check.h" />
     <ClInclude Include="mutest\event_sink.h" />
     <ClInclude Include="mutest\test.h" />

@@ -1,7 +1,9 @@
 #ifndef CPPUTEST_UTEST_H
 #define CPPUTEST_UTEST_H
 
-#include "check.h"
+#include "detail/check.h"
+
+#define UTEST_CHECK ::utest::detail::check_proxy(__FILE__, __LINE__),
 
 #define UTEST_TEST(test_name) UTEST_TEST_IMPL(test_name, __COUNTER__)
 #define UTEST_TEST_IMPL(test_name, counter) UTEST_TEST_IMPL2(test_name, counter)
