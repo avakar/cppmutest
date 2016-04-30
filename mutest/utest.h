@@ -17,8 +17,6 @@
 
 namespace utest {
 
-int master_main(int argc, char const * const argv[]);
-
 typedef void (*test_fn)();
 
 class test
@@ -69,8 +67,6 @@ private:
 	char const * m_test_name;
 	test_fn m_fn;
 };
-
-std::vector<std::string> parse_tags(char const * tags = 0);
 
 } // utest
 

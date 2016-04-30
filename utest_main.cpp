@@ -1,4 +1,5 @@
 #include "mutest/utest.h"
+#include "exec.h"
 #include <iostream>
 
 std::string utest::test::test_name() const
