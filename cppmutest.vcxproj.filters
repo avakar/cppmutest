@@ -23,6 +23,9 @@
       <Filter>mutest\detail</Filter>
     </ClInclude>
     <ClInclude Include="exec.h" />
+    <ClInclude Include="mutest\detail\registry.h">
+      <Filter>mutest\detail</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="mutest">
