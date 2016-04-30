@@ -1,4 +1,4 @@
-#include <test.h>
+#include <mutest/test.h>
 
 TEST("Hello world")
 {
