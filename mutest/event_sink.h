@@ -6,7 +6,6 @@ namespace utest {
 struct event_sink
 {
 	virtual void fail(char const * file, int line) = 0;
-	virtual void fail_eq(char const * file, int line) = 0;
 };
 
 struct event_sink_guard

@@ -1,6 +1,10 @@
 #include "mutest/utest.h"
 #include "exec.h"
 #include <iostream>
+#include <string>
+#include <vector>
+#include <regex>
+#include <assert.h>
 
 class assertion_failed_error
 	: public std::runtime_error
@@ -19,14 +23,7 @@ struct default_event_sink
 	{
 		throw assertion_failed_error();
 	}
-
-	void fail_eq(char const * file, int line) override
-	{
-		throw assertion_failed_error();
-	}
 };
-
-#include <assert.h>
 
 struct arg_shifter
 {
@@ -87,10 +84,6 @@ void parse_args(int argc, char const * const argv[], Opts process_opt, Args proc
 	while (!args.done())
 		process_arg(args.shift());
 }
-
-#include <string>
-#include <vector>
-#include <regex>
 
 int utest::master_main(int argc, char const * const argv[])
 {

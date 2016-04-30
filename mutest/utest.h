@@ -5,8 +5,8 @@
 #include "detail/registry.h"
 
 #define UTEST_CHECK ::utest::detail::check_proxy(__FILE__, __LINE__),
-
 #define UTEST_TEST(test_name) UTEST_TEST_IMPL(test_name, __COUNTER__)
+
 #define UTEST_TEST_IMPL(test_name, counter) UTEST_TEST_IMPL2(test_name, counter)
 #define UTEST_TEST_IMPL2(test_name, counter) \
 	static void _utest_test_ ## counter(); \
