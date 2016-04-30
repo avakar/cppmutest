@@ -20,7 +20,7 @@ class global_registrar
 {
 public:
 	global_registrar(char const * test_name, test_fn_t * fn, char const * file, int line);
-	static list_node<test_list_entry> * head();
+	static list_node<test_list_entry> & head();
 
 private:
 	test_list_entry m_node;

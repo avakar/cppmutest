@@ -15,7 +15,7 @@ utest::global_registrar::global_registrar(char const * test_name, utest::test_fn
 	m_node.prev->next = &m_node;
 }
 
-utest::list_node<utest::test_list_entry> * utest::global_registrar::head()
+utest::list_node<utest::test_list_entry> & utest::global_registrar::head()
 {
-	return &g_test_list_head;
+	return g_test_list_head;
 }

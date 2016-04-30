@@ -60,15 +60,15 @@ struct list_iterator
 };
 
 template <typename T>
-list_iterator<T> begin(list_node<T> * list)
+list_iterator<T> begin(list_node<T> & list)
 {
-	return list_iterator<T>(list->next);
+	return list_iterator<T>(list.next);
 }
 
 template <typename T>
-list_iterator<T> end(list_node<T> * list)
+list_iterator<T> end(list_node<T> & list)
 {
-	return list_iterator<T>(list);
+	return list_iterator<T>(&list);
 }
 
 } // namespace utest
