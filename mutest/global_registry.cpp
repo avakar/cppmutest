@@ -1,35 +1,21 @@
 #include "utest.h"
 
-static utest::global_registrar * g_registry_head = 0;
+static utest::list_node<utest::test_list_entry> g_test_list_head = { &g_test_list_head, &g_test_list_head };
 
-utest::global_registrar::global_registrar(char const * test_name, utest::test_fn fn)
-	: m_next(g_registry_head), m_test_name(test_name), m_fn(fn)
+utest::global_registrar::global_registrar(char const * test_name, utest::test_fn_t * fn, char const * file, int line)
 {
-	g_registry_head = this;
+	m_node.name = test_name;
+	m_node.fn = fn;
+	m_node.file = file;
+	m_node.line = line;
+
+	m_node.next = &g_test_list_head;
+	m_node.prev = g_test_list_head.prev;
+	m_node.next->prev = &m_node;
+	m_node.prev->next = &m_node;
 }
 
-utest::global_registrar * utest::global_registrar::next() const
+utest::list_node<utest::test_list_entry> * utest::global_registrar::head()
 {
-	return m_next;
-}
-
-utest::global_registrar * utest::global_registrar::head()
-{
-	return g_registry_head;
-}
-
-utest::test utest::global_registrar::get_test() const
-{
-	return utest::test(m_test_name, m_fn);
-}
-
-std::vector<utest::test> utest::global_registrar::get_tests()
-{
-	std::vector<utest::test> res;
-
-	utest::global_registrar * cur = utest::global_registrar::head();
-	for (; cur; cur = cur->next())
-		res.push_back(cur->get_test());
-
-	return res;
+	return &g_test_list_head;
 }

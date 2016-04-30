@@ -2,11 +2,6 @@
 #include "exec.h"
 #include <iostream>
 
-std::string utest::test::test_name() const
-{
-	return m_test_name;
-}
-
 class assertion_failed_error
 	: public std::runtime_error
 {
@@ -106,14 +101,13 @@ int utest::master_main(int argc, char const * const argv[])
 		patterns.push_back(std::regex(arg, std::regex_constants::icase));
 	});
 
-	auto should_run = [&](utest::test const & test) -> bool {
+	auto should_run = [&](utest::test_list_entry const & test) -> bool {
 		if (patterns.empty())
 			return true;
 
-		std::string const & name = test.test_name();
 		for (std::regex const & re: patterns)
 		{
-			if (std::regex_search(name, re))
+			if (std::regex_search(test.name, re))
 				return true;
 		}
 
@@ -123,7 +117,7 @@ int utest::master_main(int argc, char const * const argv[])
 	default_event_sink ev;
 	utest::event_sink_guard esg(ev);
 
-	auto && tests = utest::global_registrar::get_tests();
+	auto && tests = utest::global_registrar::head();
 
 	bool failed = false;
 	for (auto && test: tests)
@@ -131,19 +125,19 @@ int utest::master_main(int argc, char const * const argv[])
 		if (!should_run(test))
 			continue;
 
-		std::cout << test.test_name() << "\n";
+		std::cout << test.name << "\n";
 
 		bool this_test_failed = false;
 		try
 		{
-			test.fn()();
+			test.fn();
 		}
 		catch (assertion_failed_error const &)
 		{
 			this_test_failed = true;
 		}
 
-		if (test.test_name().find("#fails") != std::string::npos)
+		if (strstr(test.name, "#fails"))
 			this_test_failed = !this_test_failed;
 
 		if (this_test_failed)

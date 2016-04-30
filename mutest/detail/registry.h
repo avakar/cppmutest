@@ -1,60 +1,29 @@
 #ifndef CPPMUTEST_MUTEST_DETAIL_REGISTRY_H
 #define CPPMUTEST_MUTEST_DETAIL_REGISTRY_H
 
-#include <vector>
-#include <string>
+#include "list.h"
 
 namespace utest {
 
-typedef void (*test_fn)();
+typedef void (test_fn_t)();
 
-class test
+struct test_list_entry
+	: list_node<test_list_entry>
 {
-public:
-	test(char const * test_name, test_fn fn)
-		: m_test_name(test_name), m_fn(fn)
-	{
-	}
-
-	std::string test_name() const;
-	test_fn fn() const { return m_fn; }
-
-private:
-	std::string m_test_name;
-	test_fn m_fn;
-};
-
-class test_registry
-{
-public:
-	void add(test && t)
-	{
-		m_tests.push_back(std::move(t));
-	}
-
-	std::vector<test> const & tests() const
-	{
-		return m_tests;
-	}
-
-private:
-	std::vector<test> m_tests;
+	char const * name;
+	test_fn_t * fn;
+	char const * file;
+	int line;
 };
 
 class global_registrar
 {
 public:
-	global_registrar(char const * test_name, test_fn fn);
-	global_registrar * next() const;
-	test get_test() const;
-
-	static global_registrar * head();
-	static std::vector<test> get_tests();
+	global_registrar(char const * test_name, test_fn_t * fn, char const * file, int line);
+	static list_node<test_list_entry> * head();
 
 private:
-	global_registrar * m_next;
-	char const * m_test_name;
-	test_fn m_fn;
+	test_list_entry m_node;
 };
 
 }
