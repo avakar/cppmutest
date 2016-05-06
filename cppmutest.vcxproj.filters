@@ -5,8 +5,11 @@
     <ClCompile Include="mutest\event_sink.cpp">
       <Filter>mutest</Filter>
     </ClCompile>
-    <ClCompile Include="mutest\global_registry.cpp">
-      <Filter>mutest</Filter>
+    <ClCompile Include="mutest\detail\repr.cpp">
+      <Filter>mutest\detail</Filter>
+    </ClCompile>
+    <ClCompile Include="mutest\detail\registry.cpp">
+      <Filter>mutest\detail</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -27,6 +30,15 @@
       <Filter>mutest\detail</Filter>
     </ClInclude>
     <ClInclude Include="mutest\detail\list.h">
+      <Filter>mutest\detail</Filter>
+    </ClInclude>
+    <ClInclude Include="mutest\detail\binary_op.h">
+      <Filter>mutest\detail</Filter>
+    </ClInclude>
+    <ClInclude Include="mutest\detail\repr.h">
+      <Filter>mutest\detail</Filter>
+    </ClInclude>
+    <ClInclude Include="mutest\detail\char_stream.h">
       <Filter>mutest\detail</Filter>
     </ClInclude>
   </ItemGroup>

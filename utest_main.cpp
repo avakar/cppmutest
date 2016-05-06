@@ -19,8 +19,9 @@ public:
 struct default_event_sink
 	: utest::event_sink
 {
-	void fail(char const * file, int line) override
+	void fail(char const * file, int line, char const * msg) override
 	{
+		std::cout << file << "(" << line << "): error: " << msg << "\n";
 		throw assertion_failed_error();
 	}
 };

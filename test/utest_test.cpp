@@ -1,4 +1,5 @@
 #include <mutest/test.h>
+#include <string>
 
 TEST("Hello world")
 {
@@ -10,7 +11,15 @@ TEST("Hello world")
 
 TEST("it shall support simple comparisons")
 {
+	void * ptr = 0;
+	//chk ptr;
+
+	std::string str = "test";
+	chk str != "test";
+
 	chk 1 == 1;
+	chk true;
+	chk 1 != 1;
 }
 
 TEST("it shall support failing tests #fails")

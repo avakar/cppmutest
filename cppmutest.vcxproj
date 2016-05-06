@@ -12,16 +12,20 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="exec.h" />
+    <ClInclude Include="mutest\detail\binary_op.h" />
+    <ClInclude Include="mutest\detail\char_stream.h" />
     <ClInclude Include="mutest\detail\check.h" />
     <ClInclude Include="mutest\detail\list.h" />
     <ClInclude Include="mutest\detail\registry.h" />
+    <ClInclude Include="mutest\detail\repr.h" />
     <ClInclude Include="mutest\event_sink.h" />
     <ClInclude Include="mutest\test.h" />
     <ClInclude Include="mutest\utest.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="mutest\detail\registry.cpp" />
+    <ClCompile Include="mutest\detail\repr.cpp" />
     <ClCompile Include="mutest\event_sink.cpp" />
-    <ClCompile Include="mutest\global_registry.cpp" />
     <ClCompile Include="utest_main.cpp" />
   </ItemGroup>
   <PropertyGroup Label="Globals">

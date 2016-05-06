@@ -1,4 +1,4 @@
-#include "utest.h"
+#include "registry.h"
 
 static utest::list_node<utest::test_list_entry> g_test_list_head = { &g_test_list_head, &g_test_list_head };
 
