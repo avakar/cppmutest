@@ -20,13 +20,15 @@ struct check_proxy
 	template <typename T>
 	void operator,(expr<T> const & v)
 	{
+		auto const & env = ::mutest::global_exec_env();
+
 		char buf[256];
 		char_stream ss(buf, sizeof buf);
-		if (!v.e.check(ss))
-		{
-			ss.finalize();
-			::mutest::global_event_sink().fail(m_file, m_line, buf);
-		}
+		bool success = v.e.check(ss, env.verbose);
+		ss.finalize();
+
+		if (!success || env.verbose)
+			::mutest::global_exec_env().sink->check(success, m_file, m_line, buf);
 	}
 
 private:

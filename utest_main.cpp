@@ -19,10 +19,21 @@ public:
 struct default_event_sink
 	: mutest::event_sink
 {
-	void fail(char const * file, int line, char const * msg) override
+	default_event_sink()
 	{
-		std::cout << file << "(" << line << "): error: " << msg << "\n";
-		throw assertion_failed_error();
+	}
+
+	void check(bool success, char const * file, int line, char const * msg) override
+	{
+		if (success)
+		{
+			std::cout << file << "(" << line << "): note: " << msg << "\n";
+		}
+		else
+		{
+			std::cout << file << "(" << line << "): error: " << msg << "\n";
+			throw assertion_failed_error();
+		}
 	}
 };
 
@@ -89,8 +100,18 @@ void parse_args(int argc, char const * const argv[], Opts process_opt, Args proc
 int mutest::master_main(int argc, char const * const argv[])
 {
 	std::vector<std::regex> patterns;
+	auto & env = global_exec_env();
+	default_event_sink ev;
+
 	parse_args(argc, argv, [&](char const * opt, arg_shifter & args) {
-		throw std::runtime_error(std::string("unknown option: ") + opt);
+		if (strcmp(opt, "-v") == 0)
+		{
+			env.verbose = true;
+		}
+		else
+		{
+			throw std::runtime_error(std::string("unknown option: ") + opt);
+		}
 	}, [&](char const * arg) {
 		patterns.push_back(std::regex(arg, std::regex_constants::icase));
 	});
@@ -108,8 +129,7 @@ int mutest::master_main(int argc, char const * const argv[])
 		return false;
 	};
 
-	default_event_sink ev;
-	mutest::event_sink_guard esg(ev);
+	env.sink = &ev;
 
 	auto && tests = mutest::global_registrar::head();
 

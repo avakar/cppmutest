@@ -1,21 +1,9 @@
 #include "event_sink.h"
 #include <assert.h>
 
-static mutest::event_sink * g_global_event_sink = nullptr;
+static mutest::exec_env g_global_exec_env = {};
 
-mutest::event_sink_guard::event_sink_guard(event_sink & sink)
+mutest::exec_env & mutest::global_exec_env()
 {
-	assert(g_global_event_sink == nullptr);
-	g_global_event_sink = &sink;
-}
-
-mutest::event_sink_guard::~event_sink_guard()
-{
-	g_global_event_sink = nullptr;
-}
-
-mutest::event_sink & mutest::global_event_sink()
-{
-	assert(g_global_event_sink != nullptr);
-	return *g_global_event_sink;
+	return g_global_exec_env;
 }

@@ -1,25 +1,35 @@
 #include <mutest/test.h>
-#include <string>
 
-TEST("Hello world")
+TEST("hello world")
 {
-	// This test is a part of a suite `Suite` and is named `HelloWorld`.
-	// Case matters. The test will be referred to by the framework
-	// as `Suite:HelloWorld`. Pass this name on the command line
-	// to run this test only.
+	// This test is named "hello world". Test names should be chosen
+	// so that they describe the functionality they under test.
+	// The name will appear on output if the test fails.
+	//
+	// The names need not be unique, but you should strive for them to be.
+	//
+	// You can run only specific tests by passing a regular expression
+	// matching the test name on the command line.
+}
+
+TEST("it shall support simple checks")
+{
+	chk true;
+	chk !false;
 }
 
 TEST("it shall support simple comparisons")
 {
-	void * ptr = 0;
-	chk (unsigned char)200 == 0;
-
-	chk true && false;
 	chk 1 == 1;
-	chk 1 != 1;
+	chk 1 != 2;
+	chk 1 < 2;
+	chk 2 > 1;
+	chk 1 <= 1;
+	chk 1 >= 1;
 }
 
-TEST("it shall support failing tests #fails")
+TEST("it shall support complex comparisons")
 {
-	chk 1 == 2;
+	chk 1 + 1 == 2;
+	chk 1 << 1 == 2;
 }

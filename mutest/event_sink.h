@@ -5,18 +5,16 @@ namespace mutest {
 
 struct event_sink
 {
-	virtual void fail(char const * file, int line, char const * msg) = 0;
+	virtual void check(bool success, char const * file, int line, char const * msg) = 0;
 };
 
-struct event_sink_guard
+struct exec_env
 {
-	explicit event_sink_guard(event_sink & sink);
-	~event_sink_guard();
-	event_sink_guard(event_sink_guard const &) = delete;
-	event_sink_guard & operator=(event_sink_guard const &) = delete;
+	bool verbose;
+	event_sink * sink;
 };
 
-event_sink & global_event_sink();
+exec_env & global_exec_env();
 
 }
 
