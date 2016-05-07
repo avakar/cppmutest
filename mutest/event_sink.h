@@ -1,7 +1,7 @@
 #ifndef CPPMUTEST_EVENT_SINK_H
 #define CPPMUTEST_EVENT_SINK_H
 
-namespace utest {
+namespace mutest {
 
 struct event_sink
 {

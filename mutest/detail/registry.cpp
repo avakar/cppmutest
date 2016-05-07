@@ -1,8 +1,8 @@
 #include "registry.h"
 
-static utest::list_node<utest::test_list_entry> g_test_list_head = { &g_test_list_head, &g_test_list_head };
+static mutest::list_node<mutest::test_list_entry> g_test_list_head = { &g_test_list_head, &g_test_list_head };
 
-utest::global_registrar::global_registrar(char const * test_name, utest::test_fn_t * fn, char const * file, int line)
+mutest::global_registrar::global_registrar(char const * test_name, mutest::test_fn_t * fn, char const * file, int line)
 {
 	m_node.name = test_name;
 	m_node.fn = fn;
@@ -15,7 +15,7 @@ utest::global_registrar::global_registrar(char const * test_name, utest::test_fn
 	m_node.prev->next = &m_node;
 }
 
-utest::list_node<utest::test_list_entry> & utest::global_registrar::head()
+mutest::list_node<mutest::test_list_entry> & mutest::global_registrar::head()
 {
 	return g_test_list_head;
 }

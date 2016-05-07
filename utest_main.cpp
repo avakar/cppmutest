@@ -17,7 +17,7 @@ public:
 };
 
 struct default_event_sink
-	: utest::event_sink
+	: mutest::event_sink
 {
 	void fail(char const * file, int line, char const * msg) override
 	{
@@ -86,7 +86,7 @@ void parse_args(int argc, char const * const argv[], Opts process_opt, Args proc
 		process_arg(args.shift());
 }
 
-int utest::master_main(int argc, char const * const argv[])
+int mutest::master_main(int argc, char const * const argv[])
 {
 	std::vector<std::regex> patterns;
 	parse_args(argc, argv, [&](char const * opt, arg_shifter & args) {
@@ -95,7 +95,7 @@ int utest::master_main(int argc, char const * const argv[])
 		patterns.push_back(std::regex(arg, std::regex_constants::icase));
 	});
 
-	auto should_run = [&](utest::test_list_entry const & test) -> bool {
+	auto should_run = [&](mutest::test_list_entry const & test) -> bool {
 		if (patterns.empty())
 			return true;
 
@@ -109,9 +109,9 @@ int utest::master_main(int argc, char const * const argv[])
 	};
 
 	default_event_sink ev;
-	utest::event_sink_guard esg(ev);
+	mutest::event_sink_guard esg(ev);
 
-	auto && tests = utest::global_registrar::head();
+	auto && tests = mutest::global_registrar::head();
 
 	bool failed = false;
 	for (auto && test: tests)
@@ -143,5 +143,5 @@ int utest::master_main(int argc, char const * const argv[])
 
 int main(int argc, char * argv[])
 {
-	return utest::master_main(argc - 1, argv + 1);
+	return mutest::master_main(argc - 1, argv + 1);
 }

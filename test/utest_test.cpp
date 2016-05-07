@@ -12,13 +12,10 @@ TEST("Hello world")
 TEST("it shall support simple comparisons")
 {
 	void * ptr = 0;
-	//chk ptr;
+	chk (unsigned char)200 == 0;
 
-	std::string str = "test";
-	chk str != "test";
-
+	chk true && false;
 	chk 1 == 1;
-	chk true;
 	chk 1 != 1;
 }
 

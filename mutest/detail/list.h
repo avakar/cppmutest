@@ -1,7 +1,7 @@
 #ifndef MUTEST_DETAIL_LIST_H
 #define MUTEST_DETAIL_LIST_H
 
-namespace utest {
+namespace mutest {
 
 template <typename T>
 struct list_node
@@ -71,6 +71,6 @@ list_iterator<T> end(list_node<T> & list)
 	return list_iterator<T>(&list);
 }
 
-} // namespace utest
+} // namespace mutest
 
 #endif // MUTEST_DETAIL_LIST_H

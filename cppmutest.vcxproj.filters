@@ -41,6 +41,9 @@
     <ClInclude Include="mutest\detail\char_stream.h">
       <Filter>mutest\detail</Filter>
     </ClInclude>
+    <ClInclude Include="mutest\detail\expr.h">
+      <Filter>mutest\detail</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="mutest">

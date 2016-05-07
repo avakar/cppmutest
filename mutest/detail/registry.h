@@ -3,7 +3,7 @@
 
 #include "list.h"
 
-namespace utest {
+namespace mutest {
 
 typedef void (test_fn_t)();
 
