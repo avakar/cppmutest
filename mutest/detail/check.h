@@ -23,7 +23,7 @@ struct check_proxy
 		auto const & env = ::mutest::global_exec_env();
 
 		char buf[256];
-		char_stream ss(buf, sizeof buf);
+		char_stream ss(buf, buf + sizeof buf);
 		bool success = v.e.check(ss, env.verbose);
 		ss.finalize();
 

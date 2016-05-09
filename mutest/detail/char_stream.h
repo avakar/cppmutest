@@ -6,8 +6,8 @@ namespace detail {
 
 struct char_stream
 {
-	char_stream(char * buf, size_t len)
-		: m_first(buf), m_cur(buf), m_last(buf + len - 1)
+	char_stream(char * buf, char * end)
+		: m_first(buf), m_cur(buf), m_last(end - 1)
 	{
 	}
 
