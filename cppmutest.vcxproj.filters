@@ -44,6 +44,9 @@
     <ClInclude Include="mutest\detail\expr.h">
       <Filter>mutest\detail</Filter>
     </ClInclude>
+    <ClInclude Include="mutest\copy_error_tester.h">
+      <Filter>mutest</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="mutest">

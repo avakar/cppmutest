@@ -12,6 +12,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="exec.h" />
+    <ClInclude Include="mutest\copy_error_tester.h" />
     <ClInclude Include="mutest\detail\binary_op.h" />
     <ClInclude Include="mutest\detail\char_stream.h" />
     <ClInclude Include="mutest\detail\check.h" />

@@ -3,6 +3,7 @@
 
 #include "detail/check.h"
 #include "detail/registry.h"
+#include "copy_error_tester.h"
 
 #define UTEST_CHECK ::mutest::detail::check_proxy(__FILE__, __LINE__), ::mutest::detail::init_expr() <<
 #define UTEST_TEST(test_name) UTEST_TEST_IMPL(test_name, __COUNTER__)
