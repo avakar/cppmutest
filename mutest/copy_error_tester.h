@@ -2,6 +2,7 @@
 #define MUTEST_COPY_ERROR_TESTER_H
 
 #include <exception>
+#include <stddef.h>
 
 namespace mutest {
 
