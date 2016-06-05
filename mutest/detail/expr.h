@@ -130,10 +130,10 @@ value_expr<T>::value_expr(T const & value)
 template <typename T>
 bool value_expr<T>::check(char_stream & ss, bool verbose) const
 {
-	bool fail = !m_value;
-	if (fail || verbose)
+	bool success = static_cast<bool>(m_value);
+	if (!success || verbose)
 		repr(ss, m_value);
-	return !fail;
+	return success;
 }
 
 template <typename T>
