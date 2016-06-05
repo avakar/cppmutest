@@ -150,6 +150,16 @@ int mutest::master_main(int argc, char const * const argv[])
 		{
 			this_test_failed = true;
 		}
+		catch (std::exception const & e)
+		{
+			std::cout << test.file << "(" << test.line << "): error: " << typeid(e).name() << ": " << e.what() << "\n";
+			this_test_failed = true;
+		}
+		catch (...)
+		{
+			std::cout << test.file << "(" << test.line << "): error: unrecognized exception was thrown\n";
+			this_test_failed = true;
+		}
 
 		if (strstr(test.name, "#fails"))
 			this_test_failed = !this_test_failed;
