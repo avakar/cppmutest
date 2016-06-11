@@ -20,11 +20,15 @@ struct default_event_sink
 	: mutest::event_sink
 {
 	default_event_sink()
+		: m_cur_test(nullptr)
 	{
 	}
 
 	void check(bool success, char const * file, int line, char const * msg) override
 	{
+		if (m_cur_test)
+			std::cout << m_cur_test->name << "\n";
+
 		if (success)
 		{
 			std::cout << file << "(" << line << "): note: " << msg << "\n";
@@ -35,6 +39,13 @@ struct default_event_sink
 			throw assertion_failed_error();
 		}
 	}
+
+	void set_cur_test(mutest::test_list_entry * cur)
+	{
+		m_cur_test = cur;
+	}
+
+	mutest::test_list_entry * m_cur_test;
 };
 
 struct arg_shifter
@@ -133,13 +144,14 @@ int mutest::master_main(int argc, char const * const argv[])
 
 	auto && tests = mutest::global_registrar::head();
 
-	bool failed = false;
+	size_t total = 0;
+	size_t failed = 0;
 	for (auto && test: tests)
 	{
 		if (!should_run(test))
 			continue;
 
-		std::cout << test.name << "\n";
+		ev.set_cur_test(&test);
 
 		bool this_test_failed = false;
 		try
@@ -152,11 +164,13 @@ int mutest::master_main(int argc, char const * const argv[])
 		}
 		catch (std::exception const & e)
 		{
+			std::cout << test.name << "\n";
 			std::cout << test.file << "(" << test.line << "): error: " << typeid(e).name() << ": " << e.what() << "\n";
 			this_test_failed = true;
 		}
 		catch (...)
 		{
+			std::cout << test.name << "\n";
 			std::cout << test.file << "(" << test.line << "): error: unrecognized exception was thrown\n";
 			this_test_failed = true;
 		}
@@ -164,10 +178,12 @@ int mutest::master_main(int argc, char const * const argv[])
 		if (strstr(test.name, "#fails"))
 			this_test_failed = !this_test_failed;
 
+		++total;
 		if (this_test_failed)
-			failed = true;
+			++failed;
 	}
 
+	std::cout << "total: " << total << ", failed: " << failed << "\n";
 	return failed? 1: 0;
 }
 
