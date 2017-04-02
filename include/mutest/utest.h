@@ -1,9 +1,9 @@
 #ifndef CPPUTEST_UTEST_H
 #define CPPUTEST_UTEST_H
 
-#include "detail/check.h"
-#include "detail/registry.h"
-#include "copy_error_tester.h"
+#include "../../src/detail/check.h"
+#include "../../src/detail/registry.h"
+#include "../../src/copy_error_tester.h"
 
 #define UTEST_CHECK ::mutest::detail::check_proxy(__FILE__, __LINE__), ::mutest::detail::init_expr() <<
 #define UTEST_TEST(test_name) UTEST_TEST_IMPL(test_name, __COUNTER__)
