@@ -21,6 +21,7 @@ add_library(mutest_nomain STATIC
     src/detail/repr.h
     src/event_sink.cpp
     src/event_sink.h
+    src/exc_checker.h
     )
 
 target_include_directories(mutest_nomain PUBLIC include)
