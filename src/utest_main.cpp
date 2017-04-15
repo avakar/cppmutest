@@ -5,6 +5,7 @@
 #include <vector>
 #include <regex>
 #include <assert.h>
+#include <string.h>
 
 class assertion_failed_error
 	: public std::runtime_error
